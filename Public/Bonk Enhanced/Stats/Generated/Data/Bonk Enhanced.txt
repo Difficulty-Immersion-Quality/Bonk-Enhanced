@@ -1,3 +1,10 @@
+// ==================================== Wtfbengt's XP Status for SE ====================================
+
+new entry "XPMACHINE_STATUS"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "GiveExp;DisableCombatlog;DisableOverhead;DisablePortraitIndicator"
+
 // ==================================== Toggles ====================================
 
 // VANILLA
