@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <contentList>
 	<content contentuid="h54d7865bg37beg4d8dga284g067b98939aa1" version="1">Toggle Non-Lethal Aura</content>
-	<content contentuid="ha45851a7gf71eg472bgbeeag356e2de81b05" version="1">Characters within [1] of you will be knocked Unconscious instead of dying.&lt;br&gt;&lt;br&gt;They won't grant XP unless killed until I figure out a fix, so it's a custom toggle now.</content>
+	<content contentuid="ha45851a7gf71eg472bgbeeag356e2de81b05" version="1">Characters within [1] of you will be knocked Unconscious instead of dying.</content>
 	<content contentuid="hea18bc05g3b71g47dcg874eg8b7269011699" version="1">Doesn't work on undead, constructs, inanimate objects, dead creatures or anything immune to being knocked out.</content>
 
 	<content contentuid="h98d2d4e4g8c66g42b9g8c2eg6163419a91ba" version="1">Non-Lethal Aura</content>
