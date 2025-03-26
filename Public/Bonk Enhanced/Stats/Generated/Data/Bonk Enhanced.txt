@@ -5,69 +5,48 @@ type "StatusData"
 data "StatusType" "BOOST"
 data "StatusPropertyFlags" "GiveExp;DisableCombatlog;DisableOverhead;DisablePortraitIndicator"
 
-// ==================================== Toggles ====================================
+// ==================================== Vanilla ====================================
 
-// VANILLA
 new entry "NonLethal"
 type "PassiveData"
 using "NonLethal"
 // Toggle Non-Lethal Attacks
-data "DisplayName" "haa5dbcd2gaf52g4258g90d8g517922ac8294;3"
-// Knock someone Unconscious instead of killing them.
-data "Description" "hf1d4af21g03b3g406eg8b43g4b1bbbb3f0e5;5"
-// Doesn't work on undead, constructs, inanimate objects, dead creatures or anything immune to being knocked out.
-data "ExtraDescription" "hea18bc05g3b71g47dcg874eg8b7269011699"
-data "Boosts" "IF(Character() and not Self() and not Dead() and not Summon() and not HasAnyTags({'UNDEAD', 'CONSTRUCT', 'CREATURE_SPORE_SERVANT'}) and not HasAnyStatus({'SG_Polymorph','HAG_DISGUISE','HAG_DISGUISE_PIG','HAG_DISGUISE_SHEEP'}) and not IsImmuneToStatus('KNOCKED_OUT') and IsAttack() or IsSpell()):NonLethal()"
-data "ToggleOnFunctors" "ApplyStatus(NON_LETHAL,100,-1);ApplyStatus(BONK_ENHANCED_TOGGLE_UNLOCKER,100,-1)"
-data "ToggleOffFunctors" "RemoveStatus(NON_LETHAL);RemoveStatus(BONK_ENHANCED_TOGGLE_UNLOCKER)"
-
-// CUSTOM
-new entry "BONK_ENHANCED_TOGGLE"
-type "PassiveData"
+// data "DisplayName" "haa5dbcd2gaf52g4258g90d8g517922ac8294;3"
 // Toggle Non-Lethal Aura
-data "DisplayName" "h54d7865bg37beg4d8dga284g067b98939aa1"
+data "DisplayName" "h54d7865bg37beg4d8dga284g067b98939aa1;1"
+// Knock someone Unconscious instead of killing them.
+// data "Description" "hf1d4af21g03b3g406eg8b43g4b1bbbb3f0e5;5"
 // Characters within [1] of you will be knocked Unconscious instead of dying. They won't grant XP unless killed until I figure out a fix, so it's a custom toggle now.
-data "Description" "ha45851a7gf71eg472bgbeeag356e2de81b05"
+data "Description" "ha45851a7gf71eg472bgbeeag356e2de81b05;1"
+// Must be unarmed or using a melee weapon. Doesn't work on undead and constructs.
+// data "ExtraDescription" "h78336bc5g9130g4184ga348gfdc54fe0f6c7;1"
 // Doesn't work on undead, constructs, inanimate objects, dead creatures or anything immune to being knocked out.
+data "ExtraDescription" "hea18bc05g3b71g47dcg874eg8b7269011699;1"
 data "DescriptionParams" "Distance(30)"
-data "Icon" "Spell_Evocation_OtilukesResilientSphere"
-data "Properties" "IsToggled;ToggledDefaultAddToHotbar"
-data "ToggleOnFunctors" "ApplyStatus(BONK_NON_LETHAL,100,-1);ApplyStatus(BONK_ENHANCED_AURA,100,-1)"
-data "ToggleOffFunctors" "RemoveStatus(BONK_NON_LETHAL);RemoveStatus(BONK_ENHANCED_AURA)"
+// data "Boosts" "IF(Character() and not Self() and not Summon() and not HasAnyTags({'UNDEAD', 'CONSTRUCT', 'CREATURE_SPORE_SERVANT'}) and not HasAnyStatus({'SG_Polymorph','HAG_DISGUISE','HAG_DISGUISE_PIG','HAG_DISGUISE_SHEEP'}) and not IsImmuneToStatus('KNOCKED_OUT') and IsMeleeAttack() and (IsWeaponAttack() or IsUnarmedAttack())):NonLethal()"
+data "Boosts" "IF(Character() and not Self() and not Dead() and not Summon() and not HasAnyTags({'UNDEAD', 'CONSTRUCT', 'CREATURE_SPORE_SERVANT'}) and not HasAnyStatus({'SG_Polymorph','HAG_DISGUISE','HAG_DISGUISE_PIG','HAG_DISGUISE_SHEEP'}) and not IsImmuneToStatus('KNOCKED_OUT') and IsAttack() or IsSpell()):NonLethal()"
+// data "ToggleOffFunctors" "RemoveStatus(NON_LETHAL)"
+data "ToggleOffFunctors" "RemoveStatus(NON_LETHAL);RemoveStatus(BONK_ENHANCED_TOGGLE_UNLOCKER);RemoveStatus(BONK_NON_LETHAL);RemoveStatus(BONK_ENHANCED_AURA)"
 
-// ==================================== Unlocker ====================================
-
-new entry "BONK_ENHANCED_TOGGLE_UNLOCKER"
+new entry "NON_LETHAL"
 type "StatusData"
 data "StatusType" "BOOST"
-data "Passives" "BONK_ENHANCED_TOGGLE"
-data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead;DisablePortraitIndicator;IgnoreResting"
-
-// ==================================== Player Status ====================================
-
-new entry "BONK_NON_LETHAL"
-type "StatusData"
-data "StatusType" "BOOST"
+using "NON_LETHAL"
+// Non-Lethal Damage
+// data "DisplayName" "he263897bga5e6g4a0fgbd18g6b6e03f48d1e;2"
 // Non-Lethal Aura
-data "DisplayName" "h98d2d4e4g8c66g42b9g8c2eg6163419a91ba"
+data "DisplayName" "h98d2d4e4g8c66g42b9g8c2eg6163419a91ba;1"
+// Non-lethal damage does not kill creatures if it reduces their hit points to 0, it just leaves them unconscious. 
+// data "Description" "hdf1c7b48g4eb2g4499gac75g6c196f0db79d;2"
 // Characters within [1] of you are knocked Unconscious instead of dying. Doesn't work on undead, constructs, inanimate objects, dead creatures or anything immune to being knocked out.
-data "Description" "hc55b67begc1a7g4d67gadeeg063bc50da3dc"
+data "Description" "hc55b67begc1a7g4d67gadeeg063bc50da3dc;1"
 data "DescriptionParams" "Distance(30)"
-data "Icon" "Spell_Evocation_OtilukesResilientSphere"
-data "StackId" "BONK_NON_LETHAL"
-data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog"
-
-// ==================================== Aura ====================================
-
-// PLAYER
-new entry "BONK_ENHANCED_AURA"
-type "StatusData"
-data "StatusType" "BOOST"
-data "DescriptionParams" "Distance(30)"
-data "StackId" "BONK_ENHANCED_AURA"
+// data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog"
+data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead;IgnoreResting;ApplyToDead"
 data "AuraRadius" "30"
 data "AuraStatuses" "TARGET:IF(Character() and not Party() and not Dead() and not Summon() and not HasAnyTags({'UNDEAD', 'CONSTRUCT', 'CREATURE_SPORE_SERVANT', 'INANIMATE'}) and not HasAnyStatus({'SG_Polymorph','HAG_DISGUISE','HAG_DISGUISE_PIG','HAG_DISGUISE_SHEEP'}) and not IsImmuneToStatus('KNOCKED_OUT')):ApplyStatus(BONK_ENHANCED_AURA_INRANGE)"
-data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead;DisablePortraitIndicator;IgnoreResting"
+
+// ==================================== Custom ====================================
 
 // NPC
 new entry "BONK_ENHANCED_AURA_INRANGE"
@@ -82,9 +61,6 @@ data "Boosts" "DownedStatus(BONK_ENHANCED_DOWNED)"
 data "StackId" "BONK_ENHANCED_AURA_INRANGE"
 data "Instant" "Yes"
 data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead"
-data "Passives" ""
-
-// ==================================== Downed ====================================
 
 new entry "BONK_ENHANCED_DOWNED"
 type "StatusData"
@@ -101,48 +77,3 @@ data "StackId" "BONK_ENHANCED_DOWNED_AND_OUT"
 data "OnApplyFunctors" "RemoveStatus(BONK_ENHANCED_DOWNED)"
 data "OnRemoveFunctors" "ApplyStatus(KNOCKED_OUT,100,-1)"
 data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead;DisablePortraitIndicator;InitiateCombat;GiveExp;AllowLeaveCombat;ForceNeutralInteractions"
-
-
-// ==================================== NOT IN USE ====================================
-
-//new entry "BONK_ENHANCED_AURA_INRANGE_PASSIVE"
-//type "PassiveData"
-//data "Properties" "IsHidden"
-//data "StatsFunctorContext" "OnDamage"
-//data "StatsFunctors" "SELF:IF(LethalHP(Context.Source)):ApplyStatus(KNOCKED_OUT,100,-1)"
-
-//new entry "Target_KnockOut_Person_GOONTEST"
-//type "SpellData"
-//data "SpellType" "Target"
-//data "AIFlags" "CanNotUse"
-//data "TargetRadius" "1.5"
-//data "SpellRoll" "Attack(AttackType.MeleeWeaponAttack)"
-//data "SpellSuccess" "DealDamage(5d20, Bludgeoning, Nonmagical, Nonlethal);TARGET:IF(LethalHP() and not Player()):ApplyStatus(KNOCKED_OUT,100,-1);TARGET:IF(LethalHP() and Player()):ApplyStatus(KNOCKED_DOWN,100,3);"
-//data "TargetConditions" "Character() and not Self() and not Summon() and not Tagged('UNDEAD') and not Tagged('CONSTRUCT')"
-//data "Icon" "Action_KnockOut"
-// Knock Unconscious
-//data "DisplayName" "h408501c5gbeabg4b1fgaa73g0e157131d47e;1"
-// Make a non-lethal attack against a creature. 
-//data "Description" "h35596984gab29g48e1ga2d2g9375aa75ff6d;2"
-// If the attack would kill the creature, you <LSTag Type="Status" Tooltip="KNOCKED_OUT
-//data "ExtraDescription" "hea435666g9b8eg4445g9b08g48e7a723c5b2;3"
-//data "TooltipDamageList" "DealDamage(1d4, Bludgeoning);"
-//data "TooltipAttackSave" "MeleeWeaponAttack"
-//data "TooltipStatusApply" "ApplyStatus(KNOCKED_OUT,100,-1)"
-//data "CastSound" "Action_Cast_KnockOutPerson"
-//data "TargetSound" "Action_Impact_KnockOutPerson"
-//data "PreviewCursor" "Melee"
-//data "CastTextEvent" "Cast"
-//data "CycleConditions" "Enemy() and not Self() and not Summon()"
-//data "UseCosts" "ActionPoint:1"
-//data "SpellAnimation" "e4c33fe4-af36-47b7-9f61-51f2f6924210,,;9a52d1ad-09df-473a-bb0c-039b234a37af,,;962fa683-1f5e-46c0-8323-596af00d2954,,;ea68cfbb-960e-409f-a967-fdc27ba36378,,;6574bfb9-d601-4760-bd53-867747514006,,;66cf0be9-de93-4821-a755-32fdda2743e8,,;,,;,,;,,"
-//data "DualWieldingSpellAnimation" "07fb29aa-cde0-41cc-8014-204f97eb8849,,;fe385f62-7e9b-4517-ac55-32e5fa3f2204,,;dd52220e-8435-41b3-b700-445a1c01e464,,;ff694201-8c8a-440f-99d4-d3e7abb71b49,,;25c8454a-5058-4605-a9f0-65988688eb56,,;35691af0-4345-4b6a-b4ef-ff982e6cc116,,;,,;,,;,,"
-//data "WeaponTypes" "Melee"
-//data "SpellFlags" "IsMelee;IsHarmful"
-//data "SpellActionType" "Knockout"
-//data "SpellAnimationIntentType" "Aggressive"
-//data "PrepareEffect" "9c26a632-b09a-49c3-8139-77c602ed26cf"
-//data "CastEffect" "85c083b6-5c06-45fe-9bf9-d21c1fd83112"
-//data "TargetEffect" "9e84837a-2e41-4c37-8875-5ebec7ff80ad"
-//data "DamageType" "Bludgeoning"
-//data "Sheathing" "Melee"
