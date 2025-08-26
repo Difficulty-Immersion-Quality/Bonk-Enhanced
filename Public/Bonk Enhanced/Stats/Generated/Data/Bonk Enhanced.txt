@@ -45,6 +45,7 @@ data "DescriptionParams" "Distance(30)"
 data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead;IgnoreResting;ApplyToDead"
 data "AuraRadius" "30"
 data "AuraStatuses" "TARGET:IF(Character() and not Party() and not Dead() and not Summon() and not HasAnyTags({'UNDEAD', 'CONSTRUCT', 'CREATURE_SPORE_SERVANT', 'INANIMATE'}) and not HasAnyStatus({'SG_Polymorph','HAG_DISGUISE','HAG_DISGUISE_PIG','HAG_DISGUISE_SHEEP'}) and not IsImmuneToStatus('KNOCKED_OUT')):ApplyStatus(BONK_ENHANCED_AURA_INRANGE)"
+data "AuraFlags" "IgnoreItems"
 
 // ==================================== Custom ====================================
 
@@ -59,6 +60,7 @@ data "Description" "h5b20e335g5674g4adfgbbd3g54c545db5dbf"
 data "Icon" "Action_KnockOut"
 data "Boosts" "DownedStatus(BONK_ENHANCED_DOWNED)"
 data "StackId" "BONK_ENHANCED_AURA_INRANGE"
+data "StackType" "Ignore"
 data "Instant" "Yes"
 data "StatusPropertyFlags" "DisableCombatlog;DisableOverhead"
 
